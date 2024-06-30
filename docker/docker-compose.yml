@@ -9,8 +9,8 @@ services:
     image: "catalog-service"
     container_name: "catalog-service"
     ports:
-      - 9001:9001
-      - 8001:8001
+      - "9001:9001"
+      - "8001:8001"
     environment:
       - BPL_JVM_THREAD_COUNT=50
       - BPL_DEBUG_ENABLED=true
@@ -27,7 +27,7 @@ services:
     image: "postgres:14.12"
     container_name: "polar-postgres"
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
