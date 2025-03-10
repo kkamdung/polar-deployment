@@ -1,6 +1,6 @@
 #!/bin/sh
 
-eval($minikube -p polar docker-env)
+eval $(minikube -p polar docker-env)
 
 echo "\n📦 Initializing Kubernetes cluster...\n"
 
