@@ -54,6 +54,8 @@ services:
   edge-service:
     depends_on:
       - polar-redis
+      - polar-keycloak
+      - polar-ui
     image: "edge-service"
     container_name: "edge-service"
     ports:
