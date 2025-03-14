@@ -55,4 +55,27 @@ while [ $(kubectl get pod -l db=polar-rabbitmq | wc -l) -eq 0 ] ; do
   sleep 5
 done
 
+kubectl wait \
+  --for=condition=ready pod \
+  --selector=db=polar-rabbitmq \
+  --timeout=180s
+
+echo "\n📦 Deploying Polar UI...\n"
+
+kubectl apply -f services/polar-ui.yml
+
+sleep 5
+
+echo "\n⌛ Waiting for Polar UI to be deployed...\n"
+
+while [ $(kubectl get pod -l app=polar-ui | wc -l) -eq 0 ] ; do
+  sleep 5
+done
+
+kubectl wait \
+  --for=condition=ready pod \
+  --selector=app=polar-ui
+  --timeout=180s
+
+
 echo "\n⛵ Happy Sailing!\n"
