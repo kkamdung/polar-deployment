@@ -10,7 +10,26 @@ echo "\n🔌 Enabling NGINX Ingress Controller...\n"
 
 minikube addons enable ingress --profile polar
 
-sleep 15
+sleep 30
+
+echo "\n📦 Deploying Keycloak...\n"
+
+kubectl apply -f services/keycloak-config.yml
+kubectl apply -f services/keycloak.yml
+
+sleep 5
+
+echo "\n⌛ Waiting for Keycloak to be deployed...\n"
+
+while [ $(kubectl get pod -l app=polar-keycloak | wc -l) -eq 0 ] ; do
+  sleep 5
+done
+
+kubectl wait \
+  --for=condition=ready pod \
+  --selector=db=polar-keycloak \
+  --timeout=180s
+
 
 echo "\n📦 Deploying platform services...\n"
 kubectl apply -f services
@@ -76,6 +95,5 @@ kubectl wait \
   --for=condition=ready pod \
   --selector=app=polar-ui
   --timeout=180s
-
 
 echo "\n⛵ Happy Sailing!\n"
