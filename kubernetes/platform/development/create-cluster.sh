@@ -43,4 +43,16 @@ kubectl wait \
   --selector=db=polar-redis \
   --timeout=180s
 
+echo "\n📦 Deploying RabbitMQ..."
+
+kubectl apply -f services/rabbitmq.yml
+
+sleep 5
+
+echo "\n⌛ Waiting for RabbitMQ to be deployed...\n"
+
+while [ $(kubectl get pod -l db=polar-rabbitmq | wc -l) -eq 0 ] ; do
+  sleep 5
+done
+
 echo "\n⛵ Happy Sailing!\n"
