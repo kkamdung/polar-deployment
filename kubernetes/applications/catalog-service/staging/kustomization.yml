@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - github.com/kkamdung/catalog-service/k8s?ref=main
 
-patchesStrategicMerge:
-  - patch-env.yml
+patches:
+  - path: patch-env.yml
 
 configMapGenerator:
   - name: catalog-config
