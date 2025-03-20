@@ -2,14 +2,14 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - github.com/kkamdung/catalog-service/k8s?ref=main
+  - github.com/kkamdung/catalog-service/k8s?ref=master
 
 patches:
   - path: patch-env.yml
 
 configMapGenerator:
   - name: catalog-config
-  - behavior: merge
+    behavior: merge
     files:
       - application-staging.yml
 
@@ -17,3 +17,7 @@ images:
   - name: catalog-service
     newName: ghcr.io/kkamdung/catalog-service
     newTag: latest
+
+replicas:
+  - name: catalog-service
+    count: 2
