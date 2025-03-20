@@ -6,3 +6,10 @@ resources:
 
 patchesStrategicMerge:
   - patch-env.yml
+
+configMapGenerator:
+  - name: catalog-config
+  - behavior: merge
+    files:
+      - application-staging.yml
+
