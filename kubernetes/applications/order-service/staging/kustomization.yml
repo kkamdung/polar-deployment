@@ -6,3 +6,9 @@ resources:
 
 patches:
   - path: patch-env.yml
+
+configMapGenerator:
+  - name: order-config
+    behavior: merge
+    files:
+      - application-staging.yml
