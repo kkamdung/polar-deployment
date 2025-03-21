@@ -12,3 +12,8 @@ configMapGenerator:
     behavior: merge
     files:
       - application-staging.yml
+
+images:
+  - name: edge-service
+    newName: ghcr.io/kkamdung/edge-service
+    newTag: latest
