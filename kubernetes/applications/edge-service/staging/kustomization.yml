@@ -6,3 +6,9 @@ resources:
 
 patches:
   - path: patch-env.yml
+
+configMapGenerator:
+  - name: edge-config
+    behavior: merge
+    files:
+      - application-staging.yml
