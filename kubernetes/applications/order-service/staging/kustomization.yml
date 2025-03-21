@@ -12,3 +12,8 @@ configMapGenerator:
     behavior: merge
     files:
       - application-staging.yml
+
+images:
+  - name: order-service
+    newName: ghcr.io/kkamdung/order-service
+    newTag: latest
