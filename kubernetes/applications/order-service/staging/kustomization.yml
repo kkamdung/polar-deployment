@@ -17,3 +17,7 @@ images:
   - name: order-service
     newName: ghcr.io/kkamdung/order-service
     newTag: latest
+
+replicas:
+  - name: order-service
+    count: 1
