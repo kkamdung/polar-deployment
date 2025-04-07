@@ -27,6 +27,7 @@ services:
 
   order-service:
     depends_on:
+      - fluent-bit
       - polar-keycloak
       - polar-postgres
       - polar-rabbitmq
@@ -44,9 +45,14 @@ services:
       - SPRING_FLYWAY_URL=jdbc:postgresql://polar-postgres:5432/polardb_order
       - SPRING_RABBITMQ_HOST=polar-rabbitmq
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://host.docker.internal:8080/realms/PolarBookshop
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: 127.0.0.1:24224
 
   dispatcher-service:
     depends_on:
+      - fluent-bit
       - polar-rabbitmq
     image: "dispatcher-service"
     container_name: dispatcher-service
@@ -58,9 +64,14 @@ services:
       - BPL_DEBUG_PORT=8003
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
       - SPRING_RABBITMQ_HOST=polar-rabbitmq
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: 127.0.0.1:24224
 
   edge-service:
     depends_on:
+      - fluent-bit
       - polar-keycloak
       - polar-redis
       - polar-ui
@@ -78,8 +89,14 @@ services:
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
       - SPRING_DATA_REDIS_HOST=polar-redis
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI=http://host.docker.internal:8080/realms/PolarBookshop
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: 127.0.0.1:24224
 
   config-service:
+    depends_on:
+      - fluent-bit
     image: "config-service"
     container_name: "config-service"
     ports:
@@ -89,6 +106,10 @@ services:
       - BPL_JVM_THREAD_COUNT=50
       - BPL_DEBUG_ENABLED=true
       - BPL_DEBUG_PORT=9888
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: 127.0.0.1:24224
 
   polar-ui:
     image: "ghcr.io/polarbookshop/polar-ui:v1"
