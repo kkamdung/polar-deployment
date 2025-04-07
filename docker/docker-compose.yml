@@ -4,6 +4,7 @@ services:
 
   catalog-service:
     depends_on:
+      - fluent-bit
       - polar-keycloak
       - polar-postgres
     image: "catalog-service"
@@ -19,6 +20,10 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_catalog
       - SPRING_PROFILES_ACTIVE=testdata
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://host.docker.internal:8080/realms/PolarBookshop
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: 127.0.0.1:24224
 
   order-service:
     depends_on:
