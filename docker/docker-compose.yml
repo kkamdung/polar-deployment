@@ -38,6 +38,7 @@ services:
       - polar-keycloak
       - polar-postgres
       - polar-rabbitmq
+      - tempo
     image: "order-service"
     container_name: "order-service"
     ports:
@@ -67,6 +68,7 @@ services:
     depends_on:
       - fluent-bit
       - polar-rabbitmq
+      - tempo
     image: "dispatcher-service"
     container_name: dispatcher-service
     ports:
@@ -94,6 +96,7 @@ services:
       - polar-keycloak
       - polar-redis
       - polar-ui
+      - tempo
     image: "edge-service"
     container_name: "edge-service"
     ports:
@@ -122,6 +125,7 @@ services:
   config-service:
     depends_on:
       - fluent-bit
+      - tempo
     image: "config-service"
     container_name: "config-service"
     ports:
