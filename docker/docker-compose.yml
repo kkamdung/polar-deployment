@@ -7,6 +7,7 @@ services:
       - fluent-bit
       - polar-keycloak
       - polar-postgres
+      - tempo
     image: "catalog-service"
     container_name: "catalog-service"
     ports:
