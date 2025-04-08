@@ -21,8 +21,8 @@ services:
       - OTEL_SERVICE_NAME=catalog-service
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
-      - OTEL_METRICS_EXPORTER=none
-      - OTEL_LOGS_EXPORTER=none
+      - OTEL_METRICS_EXPORT=none
+      - OTEL_LOG_EXPORT=none
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
       - SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_catalog
       - SPRING_PROFILES_ACTIVE=testdata
@@ -46,6 +46,12 @@ services:
     environment:
       - BPL_DEBUG_ENABLED=true
       - BPL_DEBUG_PORT=8002
+      - JAVA_TOOL_OPTIONS=-javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-2.4.0.jar
+      - OTEL_SERVICE_NAME=order-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+      - OTEL_METRICS_EXPORT=none
+      - OTEL_LOG_EXPORT=none
       - POLAR_CATALOG_SERVICE_URI=http://catalog-service:9001
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
       - SPRING_R2DBC_URL=r2dbc:postgresql://polar-postgres:5432/polardb_order
