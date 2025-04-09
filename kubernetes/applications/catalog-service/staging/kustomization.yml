@@ -3,3 +3,6 @@ kind: Kustomization
 
 resources:
   - github.com/kkamdung/catalog-service/k8s?ref=main
+
+patches:
+  - path: patch-env.yml
