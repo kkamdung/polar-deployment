@@ -9,7 +9,7 @@ patches:
 
 configMapGenerator:
   - name: catalog-config
-  - behavior: merge
+    behavior: merge
     files:
       - application-staging.yml
 
