@@ -41,6 +41,13 @@ spec:
             limits:
               cpu: 200m
               memory: 120Mi
+          volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d
+              name: postgres-config-volume
+      volumes:
+        - name: postgres-config-volume
+          configMap:
+            name: postgres-config
 
 ---
 
