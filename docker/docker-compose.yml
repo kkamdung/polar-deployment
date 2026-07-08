@@ -77,6 +77,14 @@ services:
       - BPL_DEBUG_ENABLED=true
       - BPL_DEBUG_PORT=9888
 
+  polar-ui:
+    image: "ghcr.io/polarbookshop/polar-ui"
+    container_name: "polar-ui"
+    ports:
+      - "9004:9004"
+    environment:
+      - PORT=9004
+
   # Backing Services
 
   polar-postgres:
