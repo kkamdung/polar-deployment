@@ -16,6 +16,11 @@ services:
       - BPL_JVM_THREAD_COUNT=50
       - BPL_DEBUG_ENABLED=true
       - BPL_DEBUG_PORT=8001
+      - JAVA_TOOL_OPTIONS=-javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-2.29.0.jar
+      - OTEL_SERVICE_NAME=catalog-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4318
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_LOGS_EXPORTER=none
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
       - SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_catalog
       - SPRING_PROFILES_ACTIVE=testdata
@@ -212,6 +217,6 @@ services:
     command: -config.file=/etc/tempo-config.yml
     ports:
       - "3110:3100"     # Tempo
-      - "4317:4317"     # OTel
+      - "4318:4318"     # OTel
     volumes:
       - ./observability/tempo/tempo.yml:/etc/tempo-config.yml
