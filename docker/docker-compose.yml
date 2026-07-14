@@ -127,6 +127,11 @@ services:
       - BPL_JVM_THREAD_COUNT=50
       - BPL_DEBUG_ENABLED=true
       - BPL_DEBUG_PORT=9888
+      - JAVA_TOOL_OPTIONS=-javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-2.29.0.jar
+      - OTEL_SERVICE_NAME=config-service
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4318
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_LOGS_EXPORTER=none
     logging:
       driver: fluentd
       options:
@@ -174,13 +179,13 @@ services:
     image: "quay.io/keycloak/keycloak:26.6.4"
     container_name: "polar-keycloak"
     command: start-dev --import-realm
-    ports:
-      - "8080:8080"
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
     environment:
       - KC_BOOTSTRAP_ADMIN_USERNAME=user
       - KC_BOOTSTRAP_ADMIN_PASSWORD=password
-    volumes:
-      - ./keycloak:/opt/keycloak/data/import
+    ports:
+      - "8080:8080"
 
   # Observability
 
