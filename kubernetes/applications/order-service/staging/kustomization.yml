@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - github.com/kkamdung/order-service/k8s?ref=main
 
-
+patches:
+  - path: patch-env.yml
