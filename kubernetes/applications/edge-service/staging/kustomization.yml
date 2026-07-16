@@ -17,3 +17,7 @@ images:
   - name: edge-service
     newName: ghcr.io/kkamdung/edge-service
     newTag: latest
+
+replicas:
+  - name: edge-service
+    count: 1
