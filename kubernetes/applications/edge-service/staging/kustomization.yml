@@ -4,8 +4,11 @@ kind: Kustomization
 resources:
   - github.com/kkamdung/edge-service/k8s?ref=main
 
+patches:
+  - path: patch-env.yml
+
 configMapGenerator:
   - behavior: merge
     files:
-      - patch-env.yml
+      - application-staging.yml
     name: edge-config
