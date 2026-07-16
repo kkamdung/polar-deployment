@@ -12,3 +12,8 @@ configMapGenerator:
     files:
       - application-staging.yml
     name: order-config
+
+images:
+- name: order-service
+  newName: ghcr.io/kkamdung/order-service
+  newTag: latest
