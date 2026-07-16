@@ -12,3 +12,8 @@ configMapGenerator:
     files:
       - application-staging.yml
     name: edge-config
+
+images:
+  - name: edge-service
+    newName: ghcr.io/kkamdung/edge-service
+    newTag: latest
