@@ -10,5 +10,10 @@ patches:
 configMapGenerator:
   - behavior: merge
     files:
-      - application-staging.yml
+    - application-staging.yml
     name: dispatcher-config
+
+images:
+  - name: dispatcher-service
+    newName: ghcr.io/kkamdung/dispatcher-service
+    newTag: latest
