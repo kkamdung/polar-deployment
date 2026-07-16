@@ -3,3 +3,9 @@ kind: Kustomization
 
 resources:
   - github.com/kkamdung/edge-service/k8s?ref=main
+
+configMapGenerator:
+  - behavior: merge
+    files:
+      - patch-env.yml
+    name: edge-config
