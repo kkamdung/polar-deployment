@@ -145,6 +145,8 @@ services:
   grafana:
     image: "grafana/grafana-oss:13.0.2"
     container_name: grafana
+    depends_on:
+      - loki
     ports:
       - "3000:3000"
     environment:
@@ -155,3 +157,8 @@ services:
       - ./observability/grafana/dashboards:/etc/grafana/provisioning/dashboards
       - ./observability/grafana/grafana.ini:/etc/grafana/grafana.ini
 
+  loki:
+    image: "grafana/loki:main-fbf98eb"
+    container_name: loki
+    ports:
+      - "3100:3100"
