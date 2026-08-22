@@ -160,5 +160,17 @@ services:
   loki:
     image: "grafana/loki:main-fbf98eb"
     container_name: loki
+    depends_on:
+      - fluent-bit
     ports:
       - "3100:3100"
+
+  fluent-bit:
+    image: "grafana/fluent-bit-plugin-loki:3.7"
+    container_name: fluent-bit
+    ports:
+      - "24224:24224"
+    environment:
+      - LOKI_URL=http://loki:3100/loki/api/v1/push
+    volumes:
+      - ./observability/fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
