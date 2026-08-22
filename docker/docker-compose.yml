@@ -4,6 +4,7 @@ services:
 
   catalog-service:
     depends_on:
+      - polar-keycloak
       - polar-postgres
     image: "catalog-service"
     container_name: "catalog-service"
@@ -23,6 +24,7 @@ services:
 
   order-service:
     depends_on:
+      - polar-keycloak
       - polar-postgres
       - polar-rabbitmq
     image: "order-service"
