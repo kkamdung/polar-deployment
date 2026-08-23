@@ -29,6 +29,7 @@ services:
 
   order-service:
     depends_on:
+      - fluent-bit
       - polar-keycloak
       - polar-postgres
       - polar-rabbitmq
@@ -54,6 +55,7 @@ services:
 
   dispatcher-service:
     depends_on:
+      - fluent-bit
       - polar-rabbitmq
     image: "dispatcher-service"
     container_name: "dispatcher-service"
@@ -73,6 +75,7 @@ services:
 
   edge-service:
     depends_on:
+      - fluent-bit
       - polar-keycloak
       - polar-redis
       - polar-ui
@@ -97,6 +100,8 @@ services:
         fluentd-address: 127.0.0.1:24224
 
   config-service:
+    depends_on:
+      - fluent-bit
     image: "config-service"
     container_name: "config-service"
     ports:
